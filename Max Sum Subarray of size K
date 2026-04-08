@@ -1,0 +1,25 @@
+import java.util.*;
+class Solution {
+    public int maxSubarraySum(int[] arr, int k) {
+        // Code here
+        int max = Integer.MIN_VALUE;
+        int left=0;
+        int sum=0;
+        for(int right=0;right<arr.length;right++){
+             sum+=arr[right];
+            if(right-left+1==k){
+                max=Math.max(max,sum);
+                sum-=arr[left++];
+            }
+        }
+        return max;
+    }
+ public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        // Test Case 1
+        int[] arr1 = {2, 1, 5, 1, 3, 2};
+        int k1 = 3;
+        System.out.println("Test 1: " + sol.maxSubarraySum(arr1, k1));
+}
+}
