@@ -1,0 +1,26 @@
+import java.util.*;
+class Solution {
+    public static int smallestSubWithSum(int x, int[] arr) {
+        // Your code goes here
+        int min_size=Integer.MAX_VALUE;
+        int sum=0;
+        int left=0;
+        for(int right=0;right<arr.length;right++){
+            sum+=arr[right];
+            while(sum>x){
+                min_size=Math.min(min_size,right-left+1);
+                sum-=arr[left];
+                left++;
+            }
+            
+        }
+        return (min_size==Integer.MAX_VALUE)?0:min_size;
+    }
+ public static void main(String[] args) {
+
+        // Test Case 1
+        int[] arr1 = {1, 4, 45, 6, 0, 19};
+        int x1 = 51;
+        System.out.println("Test 1: " + Solution.smallestSubWithSum(x1, arr1));
+}
+}
