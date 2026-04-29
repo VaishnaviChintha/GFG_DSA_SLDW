@@ -1,0 +1,45 @@
+import java.util.*;
+class Solution {
+    public int minSwaps(int[] arr) {
+        // code here
+        int n = arr.length;
+        int minZero = Integer.MAX_VALUE;
+        int zeroCount=0;
+        int left=0;
+        boolean flag = false;
+        int k=0;
+        for(int val : arr){
+            if(val==1){
+                k++;
+                flag=true;
+            }
+        }
+        if(!flag) return -1;
+        for(int right=0;right<n;right++){
+            if(arr[right]==0){
+                zeroCount++;
+            }
+            if((right-left+1)==k){
+                minZero=Math.min(minZero,zeroCount);
+                if(arr[left]==0){
+                    zeroCount--;
+                }
+                left++;
+            }
+        }
+        return minZero;
+    }
+public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        int[] arr1 = {1, 0, 1, 0, 1};
+        int[] arr2 = {0, 0, 0, 0};
+        int[] arr3 = {1, 1, 1, 1};
+        int[] arr4 = {1, 0, 0, 1, 0, 1};
+
+        System.out.println(sol.minSwaps(arr1)); // Expected: 1
+        System.out.println(sol.minSwaps(arr2)); // Expected: -1
+        System.out.println(sol.minSwaps(arr3)); // Expected: 0
+        System.out.println(sol.minSwaps(arr4)); // Expected: 1
+    }
+}
